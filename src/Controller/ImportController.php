@@ -45,8 +45,9 @@ class ImportController extends AbstractController
 
     /**
      * @Route("/import-action", name="import_action")
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function importAction(Request $request)
+    public function importAction()
     {
         try {
             $content_file       = simplexml_load_string(file_get_contents($_FILES['xml_file']['tmp_name']));
@@ -90,6 +91,7 @@ class ImportController extends AbstractController
                 $this->em->persist($offre);
                 $this->em->flush();
             }
+            $this->addFlash('success','Import xml avec succès !');
         }
 
         return $this->redirectToRoute('import');

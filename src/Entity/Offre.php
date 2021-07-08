@@ -67,6 +67,16 @@ class Offre
      */
     private $metier;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_add;
+
+    public function __construct()
+    {
+        $this->date_add = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -188,6 +198,18 @@ class Offre
     public function setMetier(?Metier $metier): self
     {
         $this->metier = $metier;
+
+        return $this;
+    }
+
+    public function getDateAdd(): ?\DateTimeInterface
+    {
+        return $this->date_add;
+    }
+
+    public function setDateAdd(\DateTimeInterface $date_add): self
+    {
+        $this->date_add = $date_add;
 
         return $this;
     }

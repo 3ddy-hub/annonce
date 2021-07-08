@@ -3,4 +3,99 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Annonce</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="form-group mt-2">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                {% for offre in offres %}
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse{{ offre.id }}" aria-expanded="false" aria-controls="collapseOne">
+                            <table class="table table-sm">
+                                <tr>
+                                    <th>Localisation</th>
+                                    <td>{{ offre.localisation }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Société</th>
+                                    <td>{{ offre.nomEntreprise }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Site web</th>
+                                    <td>{{ offre.site }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Sécteur d'activité</th>
+                                    <td>{{ offre.secteur }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Métier/Fonction</th>
+                                    <td>{{ offre.titre }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Offe déposée le</th>
+                                    <td>{{ offre.dateAdd|date('d/m/Y') }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Offre vue</th>
+                                    <td>0</td>
+                                </tr>
+                            </table>
+                        </button>
+                    </h2>
+                    <div id="collapse{{ offre.id }}" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                         data-bs-parent="#accordionExample" style="">
+                        <div class="accordion-body">
+                            <table class="table table-sm">
+                                <tr>
+                                    <th>Référence</th>
+                                    <td>{{ offre.ref }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Déscription</th>
+                                    <td>{% for desc in offre.description %}
+                                            desc
+                                        {% endfor %}</td>
+                                </tr>
+                                <tr>
+                                    <th>Lieu de travail</th>
+                                    <td>{{ offre.localisation }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Contrat/Experience/Salaire annuel</th>
+                                    <td>{{ offre.metier.contrat }} / {{ offre.experience }} / {{ offre.metier.salaire }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Pour répondre société <br> Société</th>
+                                    <td>{{ offre.metier.contact }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Contact <br> Vous pouvez répondre à cette annonce :</th>
+                                    <td>par mail :{{ offre.metier.mail }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
