@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <form method="post" enctype="multipart/form-data" action="{{ path('import_action') }}">
+        <input type="file" name="xml_file">
+        <input type="submit" name="btn_import" value="Importer">
+    </form>
+{% endblock %}
